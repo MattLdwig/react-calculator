@@ -1,5 +1,6 @@
 :root {
-  --lightBackground : #F1F1F1;
+  --lightBackground: #F1F1F1;
+  --gray: #667086;
 }
 .App {
   text-align: center;
@@ -9,5 +10,31 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.display {
+  background: var(--gray);
+  width: 320px;
+  height: 80px;
+  padding: 20px;
+}
+
+.btn-container {
+  background: #FFF;
+}
+
+.btn--items {
+  display: grid;
+  grid-template-columns: repeat(4, 80px);
+  grid-template-rows: repeat(4, 80px);
+  list-style-type: none;
+  text-align: center;
+  padding-inline-start: 0;
+  padding: 20px;
+  margin: 0;
+}
+
+.btn--item {
+  font-size: 2em;
 }
 
