@@ -39,5 +39,7 @@
 
 .btn--item {
   font-size: 2em;
+  border: none;
+  background: #FFF;
 }
 

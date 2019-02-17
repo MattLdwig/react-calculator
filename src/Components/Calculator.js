@@ -61,8 +61,8 @@ class Calculator extends Component {
             this.calcOperation()
             break
           default:
-          if (lastValue === "0" && value === "0"  ||
-              lastValue === '.' && value === ".") {
+          if ((lastValue === "0" && value === "0")  ||
+              (lastValue === '.' && value === ".")) {
               break;
           }
           if(value === '.') { this.setState({ isDotPresent: true }) }
