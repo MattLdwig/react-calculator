@@ -30,19 +30,30 @@ class Calculator extends Component {
       }
 
       this.handleClick = this.handleClick.bind(this);
+      this.calcOperation = this.calcOperation.bind(this);
 
+  }
+
+  calcOperation() {
+    let operation = eval(this.state.operation.join('')) * 100 / 100;
+    console.log(this.state.operation.join(''));
+    this.setState({ 
+      operation: [operation],
+      result: operation 
+    })
   }
 
   handleClick(e) {
       const value = e.target.getAttribute('data-value');
       //console.log(e.target.getAttribute('data-value'));
       switch (value) {
-          case 'clear': 
+          case 'C': 
             this.setState({
                 operation: [],
+                result: 0
             })
             break
-          case 'equal':
+          case '=':
             this.calcOperation()
             break
           default:
@@ -65,7 +76,7 @@ class Calculator extends Component {
     );
     return (
       <div className="calculator">
-        <div className="display" id="display">{this.state.operation !== [] ? this.state.operation : this.state.result}</div>
+        <div className="display" id="display">{ this.state.result !== 0 ? this.state.result : this.state.operation }</div>
         <div className="btn-container">
             <div className="btn--items">
               {buttons}
