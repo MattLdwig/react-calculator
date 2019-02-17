@@ -1,5 +1,25 @@
 import React, { Component } from 'react';
 
+const calcButtons = [
+  {value: '7', id: 'seven'},
+  {value: '8', id: 'eight'},
+  {value: '9', id: 'nine'},
+  {value: '/', id: 'divide'},
+  {value: '4', id: 'four'},
+  {value: '5', id: 'five'},
+  {value: '6', id: 'six'},
+  {value: '*', id: 'multiply'},
+  {value: '1', id: 'one'},
+  {value: '2', id: 'two'},
+  {value: '3', id: 'three'},
+  {value: '-', id: 'subtract'},
+  {value: 'C', id: 'clear'},
+  {value: '0', id: 'zero'},
+  {value: '.', id: 'decimal'},
+  {value: '+', id: 'add'},
+  {value: '=', id: 'equals'}
+]
+
 class Calculator extends Component {
   
   constructor(){
@@ -14,7 +34,8 @@ class Calculator extends Component {
   }
 
   handleClick(e) {
-      const value = e.target.id;
+      const value = e.target.getAttribute('data-value');
+      //console.log(e.target.getAttribute('data-value'));
       switch (value) {
           case 'clear': 
             this.setState({
@@ -32,29 +53,23 @@ class Calculator extends Component {
       }
   } 
   render() {
+    const buttons = calcButtons.map((button) => 
+      <button 
+        data-value={button.value} 
+        id={button.id} 
+        className="btn--item" 
+        key={button.id}
+        onClick={this.handleClick}>
+          {button.value}
+      </button>
+    );
     return (
       <div className="calculator">
         <div className="display" id="display">{this.state.operation !== [] ? this.state.operation : this.state.result}</div>
         <div className="btn-container">
-            <ul className="btn--items">
-                <li className="btn--item" id="seven" onClick={this.handleClick} value="7">7</li>
-                <li className="btn--item" id="eight" onClick={this.handleClick} value="8">8</li>
-                <li className="btn--item" id="nine" onClick={this.handleClick} value="9">9</li>
-                <li className="btn--item" id="divide" onClick={this.handleClick} value="/">/</li>
-                <li className="btn--item" id="four" onClick={this.handleClick} value="4">4</li>
-                <li className="btn--item" id="five" onClick={this.handleClick} value="5">5</li>
-                <li className="btn--item" id="six" onClick={this.handleClick} value="6">6</li>
-                <li className="btn--item" id="multiply" onClick={this.handleClick} value="*">*</li>
-                <li className="btn--item" id="one" onClick={this.handleClick} value="1">1</li>
-                <li className="btn--item" id="two" onClick={this.handleClick} value="2">2</li>
-                <li className="btn--item" id="three" onClick={this.handleClick} value="3">3</li>
-                <li className="btn--item" id="subtract" onClick={this.handleClick} value="-">-</li>
-                <li className="btn--item" id="clear" onClick={this.handleClick} value="clear">C</li>
-                <li className="btn--item" id="zero" onClick={this.handleClick} value="0">0</li>
-                <li className="btn--item" id="decimal" onClick={this.handleClick} value=".">.</li>
-                <li className="btn--item" id="add" onClick={this.handleClick} value="+">+</li>
-                <li className="btn--item" id="equals" onClick={this.handleClick} value="equal">=</li>
-            </ul>
+            <div className="btn--items">
+              {buttons}
+            </div>
         </div>
       </div>
     );
