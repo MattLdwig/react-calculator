@@ -26,7 +26,8 @@ class Calculator extends Component {
       super();
       this.state = {
         result: 0,
-        operation: []
+        operation: [],
+        isInCalc: false
       }
 
       this.handleClick = this.handleClick.bind(this);
@@ -50,7 +51,8 @@ class Calculator extends Component {
           case 'C': 
             this.setState({
                 operation: [],
-                result: 0
+                result: 0,
+                isInCalc: false
             })
             break
           case '=':
@@ -58,7 +60,8 @@ class Calculator extends Component {
             break
           default:
             this.setState({
-                operation: [...this.state.operation, value]
+                operation: [...this.state.operation, value],
+                isInCalc: true
             })
             break
       }
@@ -76,7 +79,7 @@ class Calculator extends Component {
     );
     return (
       <div className="calculator">
-        <div className="display" id="display">{ this.state.result !== 0 ? this.state.result : this.state.operation }</div>
+        <div className="display" id="display">{ !this.state.isInCalc ?this.state.result : this.state.operation }</div>
         <div className="btn-container">
             <div className="btn--items">
               {buttons}
