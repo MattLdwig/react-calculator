@@ -46,6 +46,7 @@ class Calculator extends Component {
 
   handleClick(e) {
       const value = e.target.getAttribute('data-value');
+      const lastValue = this.state.operation.slice(-1)[0];
       //console.log(e.target.getAttribute('data-value'));
       switch (value) {
           case 'C': 
@@ -59,6 +60,17 @@ class Calculator extends Component {
             this.calcOperation()
             break
           default:
+          if (lastValue === "0" && value === "0" ||
+              lastValue === '.' && value === ".") {
+              break;
+          }
+          if( (value === '+' || value === '-' || value === '/' || value === '*') && (lastValue === '+' || lastValue === '-' || lastValue === '*' || lastValue === '/')) {
+            const operation = this.state.operation.pop();
+            this.setState({
+              operation: [...operation, value],
+              isInCalc: true
+          })
+          }
             this.setState({
                 operation: [...this.state.operation, value],
                 isInCalc: true
