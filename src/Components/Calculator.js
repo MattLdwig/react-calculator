@@ -27,7 +27,8 @@ class Calculator extends Component {
       this.state = {
         result: 0,
         operation: [],
-        isInCalc: false
+        isInCalc: false,
+        isDotPresent: false
       }
 
       this.handleClick = this.handleClick.bind(this);
@@ -47,33 +48,37 @@ class Calculator extends Component {
   handleClick(e) {
       const value = e.target.getAttribute('data-value');
       const lastValue = this.state.operation.slice(-1)[0];
-      //console.log(e.target.getAttribute('data-value'));
       switch (value) {
           case 'C': 
             this.setState({
                 operation: [],
                 result: 0,
-                isInCalc: false
+                isInCalc: false,
+                isDotPresent: false
             })
             break
           case '=':
             this.calcOperation()
             break
           default:
-          if (lastValue === "0" && value === "0" ||
+          if (lastValue === "0" && value === "0"  ||
               lastValue === '.' && value === ".") {
               break;
           }
+          if(value === '.') { this.setState({ isDotPresent: true }) }
+          if(value === '+' || value === '-' || value === '*' || value === '/') { this.setState({ isDotPresent: false }) }
           if( (value === '+' || value === '-' || value === '/' || value === '*') && (lastValue === '+' || lastValue === '-' || lastValue === '*' || lastValue === '/')) {
             const operation = this.state.operation.pop();
             this.setState({
               operation: [...operation, value],
-              isInCalc: true
+              isInCalc: true,
           })
           }
+          if(value === '.' && this.state.isDotPresent) {break;}
             this.setState({
                 operation: [...this.state.operation, value],
-                isInCalc: true
+                isInCalc: true,
+                isInOperation: false
             })
             break
       }
@@ -91,7 +96,7 @@ class Calculator extends Component {
     );
     return (
       <div className="calculator">
-        <div className="display" id="display">{ !this.state.isInCalc ?this.state.result : this.state.operation }</div>
+        <div className="display" id="display">{ !this.state.isInCalc ? this.state.result : this.state.operation }</div>
         <div className="btn-container">
             <div className="btn--items">
               {buttons}
