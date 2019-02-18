@@ -17,10 +17,15 @@
   height: 80px;
   padding: 20px;
   color: #FFF;
-  font-size: 4em;
+  font-size: 2em;
   display: flex;
   align-items: center;
 }
+
+svg {
+  width: 100%;
+}
+
 
 .btn-container {
   background: #FFF;
