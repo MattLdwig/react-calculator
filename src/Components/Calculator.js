@@ -28,7 +28,8 @@ class Calculator extends Component {
         result: 0,
         operation: [],
         isInCalc: false,
-        isDotPresent: false
+        isDotPresent: false,
+        currentNum: ''
       }
 
       this.handleClick = this.handleClick.bind(this);
@@ -38,7 +39,6 @@ class Calculator extends Component {
 
   calcOperation() {
     let operation = eval(this.state.operation.join('')) * 100 / 100;
-    console.log(this.state.operation.join(''));
     this.setState({ 
       operation: [operation],
       result: operation 
@@ -48,39 +48,46 @@ class Calculator extends Component {
   handleClick(e) {
       const value = e.target.getAttribute('data-value');
       const lastValue = this.state.operation.slice(-1)[0];
+      const currentNum = this.state.currentNum;
+      const checkIfDecimal = /([1-9.])/g;
       switch (value) {
           case 'C': 
             this.setState({
                 operation: [],
                 result: 0,
                 isInCalc: false,
-                isDotPresent: false
+                isDotPresent: false,
+                currentNum: ''
             })
             break
           case '=':
             this.calcOperation()
             break
           default:
-          if ((lastValue === "0" && value === "0")  ||
-              (lastValue === '.' && value === ".")) {
-              break;
-          }
-          if(value === '.') { this.setState({ isDotPresent: true }) }
-          if(value === '+' || value === '-' || value === '*' || value === '/') { this.setState({ isDotPresent: false }) }
-          if( (value === '+' || value === '-' || value === '/' || value === '*') && (lastValue === '+' || lastValue === '-' || lastValue === '*' || lastValue === '/')) {
-            const operation = this.state.operation.pop();
-            this.setState({
-              operation: [...operation, value],
-              isInCalc: true,
-          })
-          }
-          if(value === '.' && this.state.isDotPresent) {break;}
+            if(value === '.') { this.setState({ isDotPresent: true }) }
+            if(this.state.operation === [] && value === '0') { break;}
+            if(currentNum !== '' && value === '0' && !currentNum.match(checkIfDecimal)) { break;}
+            if(value === '+' || value === '-' || value === '*' || value === '/') { 
+              this.setState({ 
+                isDotPresent: false,
+              }) 
+            }
+            if( (value === '+' || value === '-' || value === '/' || value === '*') && (lastValue === '+' || lastValue === '-' || lastValue === '*' || lastValue === '/')) {
+              const operation = this.state.operation.pop();
+              this.setState({
+                operation: [...operation, value],
+                isInCalc: true,
+            })
+            }
+            if(value === '.' && this.state.isDotPresent) {break;}
             this.setState({
                 operation: [...this.state.operation, value],
                 isInCalc: true,
-                isInOperation: false
+                isInOperation: false,
+                currentNum: value !== '+' && value !== '-' && value !== '*' && value !== '/' ? this.state.currentNum+=value : ''
             })
             break
+
       }
   } 
   render() {
