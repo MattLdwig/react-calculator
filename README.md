@@ -10,18 +10,18 @@ A simple calculator built with ⚛ React ⚛ as part of the FreeCodeCamp Front-e
 
 ## Installation
 
-Clone the repo `git clone `
-Navigate to folder `cd react-calculator`
-Install dependencies `npm install`
-Start with `npm start` and open [http://localhost:3000] to view it in the browser.
+* Clone the repo `git clone https://github.com/MattLdwig/react-calculator.git`
+* Navigate to folder `cd react-calculator`
+* Install dependencies `npm install`
+* Start with `npm start` and open [http://localhost:3000] to view it in the browser.
 
 ---
 
 ## Todo
 
-- [] Allow keyboard use
-- [] Automatically adjust the font size according to the number of digits in display area
-- [] Integrated advanced functions (modulo, percentage...)
+- [ ] Allow keyboard use
+- [ ] Automatically adjust the font size according to the number of digits in display area
+- [ ] Integrated advanced functions (modulo, percentage...)
 
 ### License
 
