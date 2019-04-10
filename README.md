@@ -13,7 +13,7 @@ A simple calculator built with ⚛ React ⚛ as part of the FreeCodeCamp Front-e
 * Clone the repo `git clone https://github.com/MattLdwig/react-calculator.git`
 * Navigate to folder `cd react-calculator`
 * Install dependencies `npm install`
-* Start with `npm start` and open [http://localhost:3000] to view it in the browser.
+* Start with `npm start` and open http://localhost:3000 to view it in the browser.
 
 ---
 
